@@ -8,7 +8,6 @@ function DisplaySection() {
             <button className="button">Top</button>
         </div>
     );
-    "aaa"
 }
 
 export default DisplaySection
