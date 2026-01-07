@@ -57,6 +57,7 @@ function WebgiViewer() {
         const target = camera.target
 
 
+
         await viewer.addPlugin(GBufferPlugin)
         await viewer.addPlugin(new ProgressivePlugin(32))
         await viewer.addPlugin(new TonemapPlugin(true))
@@ -86,16 +87,15 @@ function WebgiViewer() {
 
         // 6️⃣ UI
         const uiPlugin = await viewer.addPlugin(TweakpaneUiPlugin)
-        uiPlugin.setupPlugins < IViewerPlugin > (
-            TonemapPlugin
-        )
-        viewer.getPlugin(TonemapPlugin).config.clipBackground = true;
+        uiPlugin.setupPlugins(TonemapPlugin)
+        // viewer.getPlugin(TonemapPlugin).config.clipBackground = true;
         // viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
         window.scrollTo(0, 0);
 
         let needsUpdate = true;
         const onUpdate = () => {
             needsUpdate = true;
+            // for rerendering the scene
             viewer.setDirty();
         }
 
