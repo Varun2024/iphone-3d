@@ -18,18 +18,20 @@ export const scrollAnimation = (position, target, onUpdate) => {
 
   soundTL
     .to(position, {
-      x: -3.38,
-      y: -10.74,
-      z: -5.983,
+      x: -4.52,
+      y: -11.29,
+      z: -6.39,
       onUpdate,
+      imageRendering:false
     })
-    .to(
+    soundTL.to(
       target,
       {
-        x: 1.52,
-        y: 0.77,
-        z: -1.08,
-        onUpdate,
+        x: 1.54,
+        y: 0.05,
+        z: -4.11,
+
+        imageRendering:false
       },
       0 // sync with position
     )
@@ -60,18 +62,21 @@ export const scrollAnimation = (position, target, onUpdate) => {
 
   displayTL
     .to(position, {
-      x: 10,
-      y: 6.0,
-      z: 0.011,
+      x: 6.08,
+      y: 1.25,
+      z: -0.35,
       onUpdate,
+      immediateRender: false
     })
+
     .to(
       target,
       {
-        x: -0.55,
-        y: 1.32,
-        z: 0.0,
+        x: -0.96,
+        y: 1.58,
+        z: 0.09,
         onUpdate,
+        immediateRender: false
       },
       0
     );
