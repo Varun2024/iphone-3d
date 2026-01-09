@@ -5,14 +5,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const scrollAnimation = (position, target, onUpdate) => {
+export const scrollAnimation = (position, target, onUpdate,isMobile) => {
   // ===== SOUND SECTION =====
   const soundTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".sound-section",
       start: "top bottom",
       end: "top top",
-      scrub: 1.7,
+      scrub: 2,
     },
   });
 
@@ -75,9 +75,15 @@ export const scrollAnimation = (position, target, onUpdate) => {
         x: -0.96,
         y: 1.58,
         z: 0.09,
-        onUpdate,
         immediateRender: false
       },
       0
+    ).to(
+      ".display-section",
+      {
+        opacity: 1,
+      },
+      0
     );
+    
 };

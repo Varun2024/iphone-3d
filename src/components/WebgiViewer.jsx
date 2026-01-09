@@ -38,6 +38,7 @@ const WebgiViewer = forwardRef((props, ref) => {
     const [positionRef, setPositionRef] = useState(null);
     const canvasContainerRef = useRef(null);
     const [previewMode, setPreviewMode] = useState(false);
+    const [isMobile, setIsMobile] = useState(null);
 
     useImperativeHandle(ref, () => ({
         triggerPreview() {
@@ -88,7 +89,8 @@ const WebgiViewer = forwardRef((props, ref) => {
             canvas: canvasRef.current,
         })
         setViewerRef(viewer);
-
+        const isMobileorTablet = mobileAndTabletCheck();
+        setIsMobile(isMobileorTablet);
 
         viewer.renderer.renderScale = Math.min(
             window.devicePixelRatio,
@@ -134,8 +136,16 @@ const WebgiViewer = forwardRef((props, ref) => {
         // 6️⃣ UI
         const uiPlugin = await viewer.addPlugin(TweakpaneUiPlugin)
         uiPlugin.setupPlugins(TonemapPlugin)
-        // viewer.getPlugin(TonemapPlugin).config.clipBackground = true;
+        viewer.getPlugin(TonemapPlugin).config.clipBackground = true;
         // viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
+
+        // if (isMobileorTablet){
+        //     position.set(-16.7,1.17,11.7);
+        //     target.set(0.0,1.37,0.0);
+        //     props.contentRef.current.className = "mobile-or-tablet"
+        // }
+
+
         window.scrollTo(0, 0);
 
         let needsUpdate = true;
@@ -153,7 +163,7 @@ const WebgiViewer = forwardRef((props, ref) => {
             }
         })
 
-        memoizedScrollAni(position, target, onUpdate);
+        memoizedScrollAni(position, target, onUpdate,isMobileorTablet);
     }
         , []);
 
@@ -181,10 +191,10 @@ const WebgiViewer = forwardRef((props, ref) => {
             },
             onUpdate: () => {
                 viewerRef.setDirty();
-                cameraRef.positionTargetUpdated(true);
+                cameraRef.positionUpdated(true);
             },
         })
-        gsap.to(
+        .to(
             targetRef,
             {
                 x: 1.56,

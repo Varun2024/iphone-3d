@@ -2,7 +2,7 @@ function SoundSection() {
     const handelLearnMore = () => {
         const element = document.querySelector('.display-section');
         window.scrollTo({
-            top:element?.getBoundingClientRect().bottom,
+            top:element?.getBoundingClientRect().bottom + window.scrollY,
             left:0,
             behavior:"smooth"
         })
